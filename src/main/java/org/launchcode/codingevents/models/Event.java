@@ -1,5 +1,8 @@
 package org.launchcode.codingevents.models;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
@@ -10,10 +13,13 @@ import java.util.Objects;
 /**
  * Created by Chris Bay
  */
+@Entity
 public class Event {
 
+    @Id
+    @GeneratedValue
     private int id;
-    private static int nextId = 1;
+   // private static int nextId = 1;
 
     @NotBlank(message = "Name is required")
     @Size(min = 3, max = 50, message = "Name must be between 3 and 50 characters")
@@ -31,18 +37,21 @@ public class Event {
     @Positive(message="Number of attendees must be one or more.")
     private int numberOfAttendees;
 
-    public Event(String name, String description, String contactEmail,String location,int numberOfAttendees) {
-        this();
+    private EventType type;
+
+    public Event(String name, String description, String contactEmail,String location,int numberOfAttendees,EventType type) {
+       // this();
         this.name = name;
         this.description = description;
         this.contactEmail = contactEmail;
         this.location=location;
         this.numberOfAttendees=numberOfAttendees;
+        this.type=type;
     }
 
     public Event() {
-        this.id = nextId;
-        nextId++;
+       // this.id = nextId;
+       // nextId++;
     }
     public String getName() {
         return name;
@@ -87,6 +96,14 @@ public class Event {
 
     public void setNumberOfAttendees(int numberOfAttendees) {
         this.numberOfAttendees = numberOfAttendees;
+    }
+
+    public EventType getType() {
+        return type;
+    }
+
+    public void setType(EventType type) {
+        this.type = type;
     }
 
     @Override
