@@ -46,24 +46,7 @@ public class EventCategoryController {
             eventCategoryRepository.save(eventCategory);
             return "redirect:/eventCategories";
          }
-        @GetMapping("delete")
-        public String displayDeleteEventForm(Model model) {
-            model.addAttribute("title", "Delete Events");
-            model.addAttribute("events", eventCategoryRepository.findAll());
-            return "events/delete";
-        }
 
-        @PostMapping("delete")
-        public String processDeleteEventsForm(@RequestParam(required = false) int[] eventIds) {
-
-            if (eventIds != null) {
-                for (int id : eventIds) {
-                    eventCategoryRepository.deleteById(id);
-                }
-            }
-
-            return "redirect:/events";
-        }
 
 
 }
