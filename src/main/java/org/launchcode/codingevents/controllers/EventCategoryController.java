@@ -28,7 +28,8 @@ public class EventCategoryController {
         @GetMapping("create")
         public String renderCreateEventCategoryForm(Model model) {
             model.addAttribute("title", "Create Category");
-            model.addAttribute(new Event());
+            //model.addAttribute("categories", eventCategoryRepository.findAll());
+            model.addAttribute(new EventCategory());
             model.addAttribute("types", EventType.values());
             return "eventCategories/create";
         }
@@ -43,7 +44,7 @@ public class EventCategoryController {
             }
 
             eventCategoryRepository.save(eventCategory);
-            return "redirect:";
+            return "redirect:/eventCategories";
          }
         @GetMapping("delete")
         public String displayDeleteEventForm(Model model) {
